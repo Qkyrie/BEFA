@@ -1,0 +1,9 @@
+<resources>
+
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_medium">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="footer_size">45dp</dimen>
+    <dimen name="footer_text_size">25dp</dimen>
+
+</resources>
