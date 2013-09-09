@@ -4,7 +4,7 @@
     <string name="app_name">eID Viewer</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_usb">USB</string>
-    <string name="photoDesc">eID Photo</string>
+    <string name="photoDesc">Photo</string>
     <string name="name">Name</string>
     <string name="gNames">Given Names</string>
     <string name="birthPlace">Place of birth</string>
