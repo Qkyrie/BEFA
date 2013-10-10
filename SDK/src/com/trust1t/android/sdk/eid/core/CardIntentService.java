@@ -3,6 +3,7 @@ package com.trust1t.android.sdk.eid.core;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Base64;
 import android.util.Log;
 
 import com.precisebiometrics.android.mtk.api.smartcardio.CardException;
@@ -65,18 +66,20 @@ public class CardIntentService extends NonStopIntentService{
                     String pin =intent.getStringExtra(CardIntent.PIN);
                     Log.d(Configuration.CARD_SERVICE_LOG_FILTER, "Received request to sign hash " + hash);
                     byte[] result = beIDCard.sign(hash.getBytes(), BeIDDigest.SHA_512, FileType.NonRepudiationCertificate,pin.toCharArray());
-                    String signedHash = new String(result);
-                    sendSignedHash(signedHash, CardIntent.SIGN);
-                    Log.d(CardService.LOG_FILTER, "Signedhash is "+ signedHash);
+       
+                    sendSignedHash(result, CardIntent.SIGN);
                 }
                 else if(intent.getStringExtra(CardIntent.CARD_OPERATION).equals(CardIntent.SIGN_AUTH)){
-                      String hash =intent.getStringExtra(CardIntent.HASH_TO_SIGN);
+                      byte[] hashToSign =intent.getByteArrayExtra(CardIntent.HASH_TO_SIGN);
+                      
+                      Log.i("CardIntentService", "the hash (encoded for showing) to sign is " +  Base64.encodeToString(hashToSign, Base64.DEFAULT));
+                      
                       String pin =intent.getStringExtra(CardIntent.PIN);
-                      Log.d(Configuration.CARD_SERVICE_LOG_FILTER, "Received request to auth sign " + hash);
-                      byte[] result = beIDCard.signAuthn(hash.getBytes(), pin);
-                      String signedHash = new String(result);
-                      sendSignedHash(signedHash, CardIntent.SIGN_AUTH);
-                      Log.d(CardService.LOG_FILTER, "Signedhash is "+ signedHash);
+                      byte[] result = beIDCard.signAuthn(hashToSign, pin);
+           
+         
+                      sendSignedHash(result, CardIntent.SIGN_AUTH);
+ 
                 }
             }
         }
@@ -146,7 +149,7 @@ public class CardIntentService extends NonStopIntentService{
         sendBroadcast(broadcastIntent);
     }
 
-    private void sendSignedHash(String hash, String sign_type){
+    private void sendSignedHash(byte[] hash, String sign_type){
         Intent broadcastIntent = new Intent();
         broadcastIntent.setAction(Configuration.CARD_SERVICE_BROADCAST_ACTION);
         broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);

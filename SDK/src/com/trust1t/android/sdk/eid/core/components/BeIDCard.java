@@ -493,10 +493,8 @@ public class BeIDCard {
      */
     public byte[] signAuthn(final byte[] toBeSigned, String pin) throws NoSuchAlgorithmException,
             CardException, IOException, InterruptedException {
-        final MessageDigest messageDigest = BeIDDigest.SHA_1
-                .getMessageDigestInstance();
-        final byte[] digest = messageDigest.digest(toBeSigned);
-        return this.sign(digest, BeIDDigest.SHA_1,
+
+        return this.sign(toBeSigned, BeIDDigest.SHA_256,
                 FileType.AuthentificationCertificate, pin.toCharArray());
     }
 

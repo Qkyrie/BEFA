@@ -315,8 +315,9 @@ public class CardService extends Service implements PBInitializedCallback {
         startService(intent);
     }
 
-    public void signAuth(String hash, String pin){
+    public void signAuth(byte[] hash, String pin){
         mBoundService.setBeIDCard(beIDCard);
+        Log.i("CardService", "signing AUTH method");
         Intent intent = new Intent(this, CardIntentService.class);
         intent.putExtra(CardIntent.CARD_OPERATION, CardIntent.SIGN_AUTH);
         intent.putExtra(CardIntent.PIN, pin);
