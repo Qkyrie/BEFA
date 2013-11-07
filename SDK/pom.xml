@@ -4,7 +4,7 @@
 	<groupId>com.trust1t.befa</groupId>
 	<artifactId>SDK</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>apklib</packaging>
+	<packaging>jar</packaging>
 	<name>BEFA-SDK</name>
 
 	<dependencies>
@@ -14,14 +14,13 @@
 			<version>4.1.1.4</version>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
-			<groupId>com.precisebiometrics.android.mtk</groupId>
-			<artifactId>precisemobiletkandroid</artifactId>
-			<version>1.0.0</version>
+			<groupId>com.trust1t.android.sdk.eid.core</groupId>
+			<artifactId>Commons-eid</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	<build>
+<!-- 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -51,5 +50,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>
